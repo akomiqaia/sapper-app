@@ -47,5 +47,7 @@
 	<figcaption>Have fun with Sapper!</figcaption>
 </figure>
 <h1>changes</h1>
+<h1>changes</h1>
+<h1>changes</h1>
 
 <p><strong>Try editing this file (src/routes/index.svelte) to test live reloading.</strong></p>
