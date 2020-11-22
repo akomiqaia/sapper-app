@@ -1,36 +1,59 @@
+:root {
+  /* colours */
+  --midnight: #002850;
+  --kelp: #006666;
+	--lettuce: #dce459;
+	--white: #ffffff;
+	--lesswhite: #d9d9d9;
+
+
+	/* font-sizes */
+	--title: 30px;
+	--subtext: 12px; /*font-sizes need write pixels, this is just for testing */
+	--normal: 16px;
+		
+}
+
+/* font faces */
+
+/* use pegasus for content (h1,h2,p) */
+@font-face {
+	font-family: "Pegasus";
+	src: local("WolpePegasus-Regular"),
+		url("https://www.tortoisemedia.com/wp-content/uploads/sites/2/2019/02/WolpePegasus-Regular.ttf")
+			format("truetype");
+}
+
+/* use Koopman for fixed labels (button) */
+@font-face {
+	font-family: "Koopman";
+	src: local("FSKoopman-Regular"),
+		url("https://www.tortoisemedia.com/wp-content/uploads/sites/2/2019/09/FSKoopman-Regular.ttf")
+			format("truetype");
+}
+
+@font-face {
+	font-family: "Koopman";
+	src: local("FSKoopman-Bold"),
+		url("https://www.tortoisemedia.com/wp-content/uploads/sites/2/2019/09/FSKoopman-Bold.ttf")
+			format("truetype");
+	font-weight: bold;
+}
+
 body {
-	margin: 0;
-	font-family: Roboto, -apple-system, BlinkMacSystemFont, Segoe UI, Oxygen, Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
-	font-size: 14px;
-	line-height: 1.5;
-	color: #333;
+	/* background: var(--midnight); */
+	background: #eceff1;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  text-align: center;
+	margin: 0 auto;
+	font-family: Pegasus;
 }
 
-h1, h2, h3, h4, h5, h6 {
-	margin: 0 0 0.5em 0;
-	font-weight: 400;
-	line-height: 1.2;
+@media (min-width: 640px) {
+  main {
+    max-width: none;
+  }
 }
 
-h1 {
-	font-size: 2em;
-}
-
-a {
-	color: inherit;
-}
-
-code {
-	font-family: menlo, inconsolata, monospace;
-	font-size: calc(1em - 2px);
-	color: #555;
-	background-color: #f0f0f0;
-	padding: 0.2em 0.4em;
-	border-radius: 2px;
-}
-
-@media (min-width: 400px) {
-	body {
-		font-size: 16px;
-	}
-}

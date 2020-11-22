@@ -1,53 +1,39 @@
 <script>
-	import successkid from 'images/successkid.jpg';
+ 
+  // import {Auth} from 'aws-amplify'
+  // function handleGoogleSignIn() {
+  //   console.log(Auth.federatedSignIn({provider: "Google"}))
+  //   return Auth.federatedSignIn({provider: "Google"})
+	// }
+
+
 </script>
 
 <style>
-	h1, figure, p {
-		text-align: center;
-		margin: 0 auto;
-	}
-
-	h1 {
-		font-size: 2.8em;
-		text-transform: uppercase;
-		font-weight: 700;
-		margin: 0 0 0.5em 0;
-	}
-
-	figure {
-		margin: 0 0 1em 0;
-	}
-
-	img {
-		width: 100%;
-		max-width: 400px;
-		margin: 0 0 1em 0;
-	}
-
-	p {
-		margin: 1em auto;
-	}
-
-	@media (min-width: 480px) {
-		h1 {
-			font-size: 4em;
-		}
-	}
+  h1, h2, p {
+    font-family: Pegasus;
+  }
+  a {
+    font-family: FSKoopman;
+  }
 </style>
+<h1>Tortoise Media ThinkIns</h1>
 
-<svelte:head>
-	<title>Sapper project template</title>
-</svelte:head>
+<h2>See all the availble ThinkIns</h2>
 
-<h1>Great success!</h1>
+<div>
+  <div>
+    <p>
+      Everyone who joins either the Host View or Participant View joins a single
+      OpenTok session. Anyone with the Host View open can click Start Archive or
+      Stop Archive to control recording of the entire session.
+    </p>
+  </div>
+  <div>
+    <!-- this requires more work on it. for some reason amplify is ont giving us google sign in interface -->
+    <!-- <button on:click={handleGoogleSignIn}>Sign in With google</button> --> 
 
-<figure>
-	<img alt="Success Kid" src="{successkid}">
-	<figcaption>Have fun with Sapper!</figcaption>
-</figure>
-<h1>changes</h1>
-<h1>changes</h1>
-<h1>changes</h1>
-
-<p><strong>Try editing this file (src/routes/index.svelte) to test live reloading.</strong></p>
+    <button> <a rel=prefetch href="/host/thinkin/upcoming">Host View</a> </button>
+    <button> <a href="/guest">Participant View</a> </button>
+  </div>
+</div>
