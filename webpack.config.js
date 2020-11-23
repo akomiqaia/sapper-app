@@ -1,90 +1,72 @@
-const webpack = require('webpack');
-const WebpackModules = require('webpack-modules');
-const path = require('path');
-const config = require('sapper/config/webpack.js');
-const pkg = require('./package.json');
-
-const mode = process.env.NODE_ENV;
-const dev = mode === 'development';
-
-const alias = { svelte: path.resolve('node_modules', 'svelte') };
-const extensions = ['.mjs', '.js', '.json', '.svelte', '.html'];
-const mainFields = ['svelte', 'module', 'browser', 'main'];
-const fileLoaderRule = {
-	test: /\.(png|jpe?g|gif)$/i,
-	use: [
-		'file-loader',
-	]
-};
+const MiniCssExtractPlugin = require("mini-css-extract-plugin");
+const path = require("path");
+const Dotenv = require("dotenv-webpack");
+const mode = process.env.NODE_ENV || "development";
+const prod = mode === "production";
 
 module.exports = {
-	client: {
-		entry: config.client.entry(),
-		output: config.client.output(),
-		resolve: { alias, extensions, mainFields },
-		module: {
-			rules: [
-				{
-					test: /\.(svelte|html)$/,
-					use: {
-						loader: 'svelte-loader',
-						options: {
-							dev,
-							hydratable: true,
-							hotReload: false // pending https://github.com/sveltejs/svelte/issues/2377
-						}
-					}
-				},
-				fileLoaderRule
-			]
-		},
-		mode,
-		plugins: [
-			// pending https://github.com/sveltejs/svelte/issues/2377
-			// dev && new webpack.HotModuleReplacementPlugin(),
-			new webpack.DefinePlugin({
-				'process.browser': true,
-				'process.env.NODE_ENV': JSON.stringify(mode)
-			}),
-		].filter(Boolean),
-		devtool: dev && 'inline-source-map'
-	},
-
-	server: {
-		entry: config.server.entry(),
-		output: config.server.output(),
-		target: 'node',
-		resolve: { alias, extensions, mainFields },
-		externals: Object.keys(pkg.dependencies).concat('encoding'),
-		module: {
-			rules: [
-				{
-					test: /\.(svelte|html)$/,
-					use: {
-						loader: 'svelte-loader',
-						options: {
-							css: false,
-							generate: 'ssr',
-							hydratable: true,
-							dev
-						}
-					}
-				},
-				fileLoaderRule
-			]
-		},
-		mode,
-		plugins: [
-			new WebpackModules()
-		],
-		performance: {
-			hints: false // it doesn't matter if server.js is large
-		}
-	},
-
-	serviceworker: {
-		entry: config.serviceworker.entry(),
-		output: config.serviceworker.output(),
-		mode
-	}
+  entry: {
+    bundle: ["./src/main.js"],
+  },
+  resolve: {
+    alias: {
+      svelte: path.resolve("node_modules", "svelte"),
+    },
+    extensions: [".mjs", ".js", ".svelte"],
+    mainFields: ["svelte", "browser", "module", "main"],
+  },
+  output: {
+    path: __dirname + "/public",
+    filename: "[name].js",
+    chunkFilename: "[name].[id].js",
+    
+  },
+  module: {
+    rules: [
+      {
+        test: /\.svelte$/,
+        use: {
+          loader: "svelte-loader",
+          options: {
+            emitCss: true,
+            hotReload: true,
+          },
+        },
+      },
+      {
+        test: /\.css$/i,
+        use: [
+          /**
+           * MiniCssExtractPlugin doesn't support HMR.
+           * For developing, use 'style-loader' instead.
+           * */
+          prod ? MiniCssExtractPlugin.loader : "style-loader",
+					"css-loader"
+        ],
+      },
+       {
+        test: /\.(png|jpe?g|svg)$/i,
+        use: [
+          {
+            loader: 'file-loader',
+            options: {
+              publicPath: 'assets',
+            },
+          },
+        ],
+      },
+    ],
+  },
+  devServer: {
+    historyApiFallback: true,
+  },
+  mode,
+  plugins: [
+    new MiniCssExtractPlugin({
+      filename: "[name].css",
+			chunkFilename: '[name].[id].css'
+    }),
+    new Dotenv(),
+  ],
+  devtool: prod ? false : "source-map",
 };

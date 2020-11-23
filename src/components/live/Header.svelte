@@ -1,7 +1,7 @@
 <script>
   import Tooltip from "../tooltip/Tooltip";
   
-  import { handleTimeFormating } from "../../pages/host/_helpers";
+  import { handleTimeFormating } from "../../pages/host/helpers";
 
   export let isRecording = false;
   export let thinkinName;
