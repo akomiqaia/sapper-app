@@ -22,7 +22,7 @@
     "webpack-dev-server": "^3.3.1"
   },
   "scripts": {
-    "build": "cross-env NODE_ENV=production webpack",
+    "build": "routify -b && cross-env NODE_ENV=production webpack",
     "dev": "run-p watch:routify watch:webpack",
     "svelte-check": "svelte-check --watch",
     "watch:webpack": "webpack-dev-server --content-base public",
