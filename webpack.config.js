@@ -34,7 +34,7 @@ module.exports = {
         },
       },
       {
-        test: /\.css$/i,
+        test: /\.css$/,
         use: [
           /**
            * MiniCssExtractPlugin doesn't support HMR.
@@ -44,17 +44,17 @@ module.exports = {
 					"css-loader"
         ],
       },
-       {
-        test: /\.(png|jpe?g|svg)$/i,
-        use: [
-          {
-            loader: 'file-loader',
-            options: {
-              publicPath: 'assets',
-            },
-          },
-        ],
-      },
+      //  {
+      //   test: /\.(png|jpe?g|svg)$/i,
+      //   use: [
+      //     {
+      //       loader: 'file-loader',
+      //       options: {
+      //         publicPath: 'assets',
+      //       },
+      //     },
+      //   ],
+      // },
     ],
   },
   devServer: {

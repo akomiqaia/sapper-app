@@ -60,6 +60,7 @@ export function checkThinkIsLive(startDate, duration) {
 }
 
 export async function fetchData(url) {
+  console.log(process.env.BASE_API_URL)
   const res = await fetch(`${process.env.BASE_API_URL}${url}`);
   const data = await res.json();
 
